@@ -14,8 +14,6 @@ This document currently focuses on validating an entity **given** a class. A fut
     * Fan Powered Parallel
   * Bypass
 
-<!-- ![](../_media/vav_heirarchy.png) -->
-
 ---
 
 ## Composition
@@ -80,7 +78,7 @@ This document currently focuses on validating an entity **given** a class. A fut
 
 We can represent this by requiring the VAV to have either:
 * Electric Heating Coil
-OR
+<br />OR
 * Hot Water Coil AND Hot Water Valve
   * Could store this as a subshape (Terminal Unit HHW Heating bundle)
 
@@ -95,7 +93,7 @@ OR
     pathRequirements: [
         pathDistance: 1
     ]
-    validationType: qualifiedValueShape
+    validationType: qualifiedValuesOfProperties
     properties: [
         classOrSubClassOf: brick:Damper
     ]

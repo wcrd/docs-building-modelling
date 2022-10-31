@@ -58,10 +58,15 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'Modelling Guidance/intro',
+            docId: '/category/modelling-guidance',
             position: 'left',
             label: 'Docs',
           },
+          {
+            href: "https://building-ontology-browser.web.app",
+            position: 'left',
+            label: 'Ontology Explorer',
+          }
         ],
       },
       footer: {

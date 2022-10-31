@@ -1,8 +1,0 @@
-{
-  "label": "Validation Shapes",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Definitions on entity types and how they are validated"
-  }
-}
