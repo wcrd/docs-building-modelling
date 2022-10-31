@@ -18,8 +18,8 @@ This document currently focuses on validating an entity **given** a class. A fut
 
 ## Composition
 
-#### Core
-##### Base VAV
+### Core
+#### Base VAV
 * VAV must have a damper as a direct part.
     ```
     path: brick:hasPart
@@ -32,10 +32,10 @@ This document currently focuses on validating an entity **given** a class. A fut
     ]
     ```
 
-##### Single Duct
+#### Single Duct
 * Inherits all requirements from Base VAV.
 
-##### Single Duct with Reheat
+#### Single Duct with Reheat
 * Inherits all requirements from Single Duct VAV.
 * VAV must have a subclass of Heating Coil (primarily Hot Water Coil or an Electric Heating Coil).
   * *Method 1 - subclass of heating coil*
@@ -85,7 +85,7 @@ We can represent this by requiring the VAV to have either:
 
 **NOTE:** Add class switch:Electric_Heating_Coil
 
-##### Dual Duct
+#### Dual Duct
 * Inherits all requirements from Base VAV.
 * VAV must have 2 dampers as direct parts.
     ```
@@ -103,7 +103,7 @@ We can represent this by requiring the VAV to have either:
     ]
     ```
 
-##### Fan Powered
+#### Fan Powered
 * Inherits all requirements from Base VAV.
 * VAV must have a Fan as a direct part.
     ```
@@ -119,7 +119,7 @@ We can represent this by requiring the VAV to have either:
 * VAV must have a subclass of Heating Coil (primarily Hot Water Coil or an Electric Heating Coil).
   * See validation steps described in `Single Duct with Reheat`
 
-##### Fan Powered: Series & Parallel
+#### Fan Powered: Series & Parallel
 We do not have an explicit method for determining differences.
 Technically, we could separate via the fan 'air stream':
 * Parallel: Return Fan
@@ -149,7 +149,7 @@ Technically, we could separate via the fan 'air stream':
 
 Currently we are just using 'Fan'. We can add this validation soon.
 
-##### Bypass VAV
+#### Bypass VAV
 This is technically the same componentry as the Base VAV. The method for differentiation is the same as for the Series and Parallel boxes - providing a more detailed subclass for the components.
 * VAV must have a Bypass Damper
     ```
@@ -163,7 +163,7 @@ This is technically the same componentry as the Base VAV. The method for differe
     ]
     ```
 
-#### Switch
+### Switch
 Nil
 
 
@@ -173,10 +173,10 @@ A VAV should be fed by some air distribution network or from major airside equip
 
 This is not currently being validated.
 
-#### Core
+### Core
 Nil
 
-#### Switch
+### Switch
 Nil
 
 
@@ -185,7 +185,7 @@ Nil
 
 { Rules around points for each variation; must include at least the following: All, Minimum Set}
 
-#### All
+### All
 An entity of this type is expected to have a selection of points from this provided list. Any points assigned that are not on this list will throw a warning.
 
 
@@ -197,7 +197,7 @@ An entity of this type is expected to have a selection of points from this provi
 |||
 
 
-#### Minimum Set
+### Minimum Set
 The minimum selection of points Switch Automation expects to see on an entity of this type.
 
-#### ::Other Sets...::
+### ::Other Sets...::

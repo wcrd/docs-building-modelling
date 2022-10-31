@@ -17,23 +17,23 @@ There will be variations in a future version.
 ---
 ## Composition
 
-#### Core
+### Core
 Nil.
 
 Fans may have an associated VFD through a `brick:isPartOf` relationship (see [VFD.md](../vfd/VFD.md)), however this is validated as part of the VFD shapes.
 
 If there is a requirement for a root equipment (i.e. AHU, Cooling Tower, etc) to have a Fan with a VFD then this would be validated as part of the root equipment shapes.
 
-#### Switch
+### Switch
 Nil.
 
 
 ## Relationships
 
-#### Core
+### Core
 Nil.
 
-#### Switch
+### Switch
 Nil.
 
 
@@ -42,7 +42,7 @@ Nil.
 
 { Rules around points for each variation; must include at least the following: All, Minimum Set}
 
-#### All
+### All
 An entity of this type is expected to have a selection of points from this provided list. Any points assigned that are not on this list will throw a warning.
 
 
@@ -54,7 +54,7 @@ An entity of this type is expected to have a selection of points from this provi
 |||
 
 
-#### Minimum Set
+### Minimum Set
 The minimum selection of points Switch Automation expects to see on an entity of this type.
 
-#### ::Other Sets...::
+### ::Other Sets...::

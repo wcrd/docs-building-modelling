@@ -15,26 +15,26 @@ Nil
 ---
 ## Composition
 
-#### Core
+### Core
 Nil
 
-#### Switch
+### Switch
 Nil
 
 
 ## Relationships
 
-#### Core
+### Core
 Nil
 
-#### Switch
+### Switch
 Nil
 
 Switch does not require modelling components beyond the damper entity.
 
 ## Points
 
-#### All
+### All
 An entity of this type is expected to have a selection of points from this provided list. Any points assigned that are not on this list will throw a warning.
 
 
@@ -77,7 +77,7 @@ An entity of this type is expected to have a selection of points from this provi
 | CO2                          | CO2_Sensor                                       |
 | Index Pressure               | switch:Index_Static_Pressure_Sensor              |
 
-#### Minimum Set
+### Minimum Set
 The minimum selection of points Switch Automation expects to see on an entity of this type.
 
 **ONE** point from the following list:
@@ -89,4 +89,4 @@ The minimum selection of points Switch Automation expects to see on an entity of
 | Position Command             | Position_Command                    |
 | Position Status              | switch:Position_Status              |
 
-#### ::Other Sets...::
+### ::Other Sets...::

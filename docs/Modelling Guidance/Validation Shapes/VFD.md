@@ -12,9 +12,9 @@ A variation on VFDs exists called a VSD, which is a DC only VFD. That entity typ
 
 ## Composition
 
-#### Core
+### Core
 Nil
-#### Switch
+### Switch
 Nil
 
 A VFD does not have any components that are required to be modelled.
@@ -22,10 +22,10 @@ A VFD does not have any components that are required to be modelled.
 
 ## Relationships
 
-#### Core
+### Core
 Nil
 
-#### Switch
+### Switch
 1. A VFD must be (immediately) part of a Pump or Fan (or any of their subclasses)
    ```
    path: brick:isPartOf
@@ -45,7 +45,7 @@ Nil
 
 ## Points
 
-#### All
+### All
 An entity of this type is expected to have a selection of points from this provided list. Any points assigned that are not on this list will throw a warning.
 
 
@@ -85,5 +85,5 @@ An entity of this type is expected to have a selection of points from this provi
 
 
 
-#### Minimum Set
+### Minimum Set
 The minimum selection of points Switch Automation expects to see on an entity of this type.
