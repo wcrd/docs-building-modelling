@@ -38,13 +38,13 @@ This document currently focuses on validating an entity **given** a class. A fut
     <div>
         <Tabs>
             <TabItem value="1" label="Single Duct" default>
-                <VAV_SingleDuct/>
+                <VAV_SingleDuct width="100%"/>
             </TabItem>
             <TabItem value="2" label="Single Duct with Reheat (Elec)" default>
-                <VAV_SingleDuct_ReheatElec/>
+                <VAV_SingleDuct_ReheatElec width="100%"/>
             </TabItem>
             <TabItem value="3" label="Single Duct wth Reheat (HHW)" default>
-                <VAV_SingleDuct_ReheatHHW/>
+                <VAV_SingleDuct_ReheatHHW width="100%"/>
             </TabItem>
         </Tabs>
     </div>
@@ -54,7 +54,7 @@ This document currently focuses on validating an entity **given** a class. A fut
     <div>
         <Tabs>
             <TabItem value="1" label="Dual Duct" default>
-                <VAV_DualDuct/>
+                <VAV_DualDuct width="100%"/>
             </TabItem>
         </Tabs>
     </div>
@@ -64,16 +64,16 @@ This document currently focuses on validating an entity **given** a class. A fut
     <div>
         <Tabs>
             <TabItem value="1" label="Series with Reheat (Elec)" default>
-                <VAV_Fan_Series_ReheatElec/>
+                <VAV_Fan_Series_ReheatElec width="100%"/>
             </TabItem>
             <TabItem value="2" label="Series wth Reheat (HHW)" default>
-                <VAV_Fan_Series_ReheatHHW/>
+                <VAV_Fan_Series_ReheatHHW width="100%"/>
             </TabItem>
             <TabItem value="3" label="Parallel with Reheat (Elec)" default>
-                <VAV_Fan_Parallel_ReheatElec/>
+                <VAV_Fan_Parallel_ReheatElec width="100%"/>
             </TabItem>
             <TabItem value="4" label="Parallel wth Reheat (HHW)" default>
-                <VAV_Fan_Parallel_ReheatHHW/>
+                <VAV_Fan_Parallel_ReheatHHW width="100%"/>
             </TabItem>
         </Tabs>
     </div>
@@ -83,7 +83,7 @@ This document currently focuses on validating an entity **given** a class. A fut
     <div>
         <Tabs>
             <TabItem value="1" label="Bypass" default>
-                <VAV_Bypass/>
+                <VAV_Bypass width="100%"/>
             </TabItem>
         </Tabs>
     </div>
