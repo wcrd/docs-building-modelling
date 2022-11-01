@@ -8,7 +8,7 @@ Fans can either be:
 
 At this time we are not validating against this distinction, but we will do in future.
 
-Fans may also have an associated VFD. A VFD is related to the Fan through a `brick:isPartOf` relationship (see [VFD.md](../vfd/VFD.md))
+Fans may also have an associated VFD. A VFD is related to the Fan through a `brick:isPartOf` relationship (see [VFD.md](./VFD.md))
 
 #### Variations
 Nil.
@@ -20,7 +20,7 @@ There will be variations in a future version.
 ### Core
 Nil.
 
-Fans may have an associated VFD through a `brick:isPartOf` relationship (see [VFD.md](../vfd/VFD.md)), however this is validated as part of the VFD shapes.
+Fans may have an associated VFD through a `brick:isPartOf` relationship (see [VFD.md](./VFD.md)), however this is validated as part of the VFD shapes.
 
 If there is a requirement for a root equipment (i.e. AHU, Cooling Tower, etc) to have a Fan with a VFD then this would be validated as part of the root equipment shapes.
 
