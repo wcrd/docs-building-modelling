@@ -1,10 +1,21 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+import VAV_SingleDuct from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct.svg"
+import VAV_SingleDuct_ReheatElec from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct_Reheat-Elec.svg"
+import VAV_SingleDuct_ReheatHHW from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct_Reheat-HHW.svg"
+import VAV_Bypass from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct.svg"
+
+
+
 # VAV
 
 There are a number of variations on a VAV that are found in buildings. A hierarchy of validation is described here, with a minimum set of requirements that every VAV must meet, as well as a series of finer requirement that describe each variation.
 
 This document currently focuses on validating an entity **given** a class. A future operating state would better be an iterative validation and classification scheme, where we first classify something as a base VAV, before iterating down to the finest classification shape it satisfies.
 
-#### Variations
+### Variations
 * Base VAV (minimum spec)
   * Single Duct
     * Single Duct with Reheat
@@ -13,6 +24,25 @@ This document currently focuses on validating an entity **given** a class. A fut
     * Fan Powered Series
     * Fan Powered Parallel
   * Bypass
+
+#### Diagrams
+
+<details class="details-diagrams">
+    <summary>Single Duct</summary>
+    <div>
+        <Tabs>
+            <TabItem value="1" label="Single Duct" default>
+                <VAV_SingleDuct/>
+            </TabItem>
+            <TabItem value="2" label="Single Duct with Reheat (Elec)" default>
+                <VAV_SingleDuct_ReheatElec/>
+            </TabItem>
+            <TabItem value="3" label="Single Duct wth Reheat (HHW)" default>
+                <VAV_SingleDuct_ReheatHHW/>
+            </TabItem>
+        </Tabs>
+    </div>
+</details>
 
 ---
 

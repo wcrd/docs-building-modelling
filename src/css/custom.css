@@ -37,3 +37,8 @@
 .hero--primary {
   background-color: #434d5e;
 }
+
+/* Custom Classes */
+.details-diagrams {
+  background-color: none;
+}
