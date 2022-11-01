@@ -40,5 +40,8 @@
 
 /* Custom Classes */
 .details-diagrams {
-  background-color: none;
+  background-color: white;
+}
+.details-diagrams > summary {
+  font-weight: bold;
 }

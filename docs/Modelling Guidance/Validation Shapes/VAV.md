@@ -5,6 +5,12 @@ import TabItem from '@theme/TabItem';
 import VAV_SingleDuct from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct.svg"
 import VAV_SingleDuct_ReheatElec from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct_Reheat-Elec.svg"
 import VAV_SingleDuct_ReheatHHW from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct_Reheat-HHW.svg"
+import VAV_DualDuct from "@site/static/img/docs/vav/SubParts_VAV-Dual_Duct.svg"
+import VAV_Fan_Series_ReheatElec from "@site/static/img/docs/vav/SubParts_VAV-Series-Elec.svg"
+import VAV_Fan_Series_ReheatHHW from "@site/static/img/docs/vav/SubParts_VAV-Series-HHW.svg"
+import VAV_Fan_Parallel_ReheatElec from "@site/static/img/docs/vav/SubParts_VAV-Parallel-Elec.svg"
+import VAV_Fan_Parallel_ReheatHHW from "@site/static/img/docs/vav/SubParts_VAV-Parallel-HHW.svg"
+
 import VAV_Bypass from "@site/static/img/docs/vav/SubParts_VAV-Single_Duct.svg"
 
 
@@ -27,8 +33,8 @@ This document currently focuses on validating an entity **given** a class. A fut
 
 #### Diagrams
 
-<details class="details-diagrams">
-    <summary>Single Duct</summary>
+<details className="details-diagrams">
+    <summary className="">Single Duct</summary>
     <div>
         <Tabs>
             <TabItem value="1" label="Single Duct" default>
@@ -39,6 +45,45 @@ This document currently focuses on validating an entity **given** a class. A fut
             </TabItem>
             <TabItem value="3" label="Single Duct wth Reheat (HHW)" default>
                 <VAV_SingleDuct_ReheatHHW/>
+            </TabItem>
+        </Tabs>
+    </div>
+</details>
+<details className="details-diagrams">
+    <summary className="">Dual Duct</summary>
+    <div>
+        <Tabs>
+            <TabItem value="1" label="Dual Duct" default>
+                <VAV_DualDuct/>
+            </TabItem>
+        </Tabs>
+    </div>
+</details>
+<details className="details-diagrams">
+    <summary className="">Fan Powered</summary>
+    <div>
+        <Tabs>
+            <TabItem value="1" label="Series with Reheat (Elec)" default>
+                <VAV_Fan_Series_ReheatElec/>
+            </TabItem>
+            <TabItem value="2" label="Series wth Reheat (HHW)" default>
+                <VAV_Fan_Series_ReheatHHW/>
+            </TabItem>
+            <TabItem value="3" label="Parallel with Reheat (Elec)" default>
+                <VAV_Fan_Parallel_ReheatElec/>
+            </TabItem>
+            <TabItem value="4" label="Parallel wth Reheat (HHW)" default>
+                <VAV_Fan_Parallel_ReheatHHW/>
+            </TabItem>
+        </Tabs>
+    </div>
+</details>
+<details className="details-diagrams">
+    <summary className="">Bypass</summary>
+    <div>
+        <Tabs>
+            <TabItem value="1" label="Bypass" default>
+                <VAV_Bypass/>
             </TabItem>
         </Tabs>
     </div>
