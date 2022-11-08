@@ -1,0 +1,264 @@
+---
+sidebar_label: Command Points - Analog vs. Enum
+---
+
+import multistate_types from "@site/static/img/docs/notes/cmd_a_vs_enum/multi_state.png"
+import types_of_data from "@site/static/img/docs/notes/cmd_a_vs_enum/types_of_data.png"
+import valve_example from "@site/static/img/docs/notes/cmd_a_vs_enum/valve_example.png"
+
+
+# Point Types: Command (ENUM vs. ANALOG)
+
+Description: Note on what type to use
+Status: Done
+Type: Internal Guidance
+
+---
+
+## Overview
+
+There is no clear mechanism in Brick to determine whether a `command` point is an ANALOG (e.g. percentage) or ENUM point. The definitions in the Brick ontology do not adequately cover this region, requiring many command points to take on ANALOG units from qudt only.
+
+e.g. given a:
+
+- Position Command
+
+is this point an analog command (0-100%, typically) or an OPEN/CLOSE command?
+
+Being able to categorically tell whether a point is measuring an ANALOG range or ENUM list is important for downstream usage.
+
+This note aims to set out a clear strategy to follow until Brick converges on a clearer solution.
+
+## Review of modelling systems
+
+The various modelling ontologies and taxonomies add to this confusion as they all take a different approach to this task.
+
+#### Brick 
+Does not provide clear guidance on establishing whether a command is an ENUM or ANALOG.
+    
+> *brick point type definitions* <br/>
+> **setpoint:** A Setpoint is an input value at which the desired property is set <br/>
+> ***command:*** A Command is an output point that directly determines the behavior of equipment and/or affects relevant operational points. <br/>
+> **status:** A Status is input point that reports the current operating mode, state, position, or condition of an item. Statuses are observations and should be considered 'read-only’ <br/>
+> **sensor:** A Sensor is an input point that represents the value of a device or instrument designed to detect and measure a variable (ASHRAE Dictionary). <br/>
+
+Brick does not explicitly define a status as an enumerated observation, however the ontology tree only includes points that would be considered enumerated points under this category.
+
+Brick does not provide any further guidance on documenting enum points through units or entity properties.
+    
+#### Google
+    
+**TL;DR:** Provides a robust set of definitions, however there is still some ambiguity in declaring multi-state values (ENUM) on command points, especially in regards to sub-parts. 
+
+- `status` = multistate
+- `mode` = multistate
+- `command` = multistate if no measurement subfield provided, else analog. 
+
+---
+
+As part of defining a point (field), special tags (subfields) are put into a certain ordered slots. Each slot has a specific purpose. The two subfield slots we are interested in are defined as:
+
+> **Measurement:** A field that implies the type of measurement being performed. Each measurement is exclusive to a particular physical quantity (e.g. temperature), but which may have multiple valid units of measurement (*F, R, *C, K). This subfield is required for any numeric field with a point type other than `count`.
+>
+> **Point Type:** Defines the function of the point, across several layers of context: directionality (input/output), reading type (analog, input, multistate), telemetric versus static data (label and capacity being static; sensor and setpoint being active), etc. This is the one component that is required for every field. 
+
+The various points types are defined as follows:
+
+> **google point type definitions**
+> 
+> 
+> ```jsx
+> point_type:
+>   accumulator: "The total accumulated quantity (e.g. total energy accumulated)."
+>   alarm: "A point that interprets some input values qualitatively (e.g. as good or bad, normal or in alarm, etc.). Alarms are always binary."
+>   capacity: "A design parameter quantity. Ex: design motor power capacity. Is always a maximum limit."
+>   counter: "Special case of accumulator that assumes integer values and non-dimensional units"
+>   command: "The signal given to make an action happen. Defaults to multistate unless given a measurement type"
+>   count: "Total count of actions or requests."
+>   label: "Identifying alias for component or system."
+>   mode: "Distinct mode of operation within system. Common example is economizer mode (enabled or disabled)."
+>   requirement: "A lower limit design parameter (e.g. minimum flowrate requirement). Is always a lower limit."
+>   sensor: "Component used to measure some quality of a system or process. Can be feedback for an analog command."
+>   setpoint: "Control target of process or system."
+>   status: "The multistate value indicating an observed state in a piece of equipment, often indicating if a command was effected. It is a neutral observation (e.g. no quality judgment of 'good' or 'bad'). It also has no units of measurement (therefore if combined with a measurement subfield, it will indicate that the field is the directional status based on some measurement of that type, e.g. power_status equates to an on/off value based on some inference of power)."
+>   specification: "The specified design value for a particular operating condition (differential pressure specification)."
+>   timestamp: "An instant in time, represented as a numeric offset from the epoch."
+> ```
+> 
+
+Google states that all `status` and `mode` points are MULTISTATE. `command` points are assumed MULTISTATE if no ‘measurement’ subfield is provided.
+
+> *google training slide on multi-states*
+> 
+> <img src={multistate_types}/>
+    
+
+> ***google multistate definition***
+> 
+> 
+> ### **Multi-State Values**
+> 
+> A multi-state is a data type that consists of an enumerated set of states with specific meanings, such as {ON, OFF, AUTO}.
+> 
+> ### **Multi-State groups**
+> 
+> Multi-state groups are defined on a field-by-field basis. Fields with point type `status` or `mode` are always multistates whereas ones with type `command` should be interpreted as multistate if not given a measurement subfield. All allowed states for a field across all devices are listed, however individual devices may or may not use all states 
+> 
+
+In addition to the definitions of the types, the datatypes each type supports is also provided below. An argument could be raised that given their definitions, a enum `position command` point could be modelled as a setpoint, however due to the datatype support this is not an option (which is consistent; keep commands as commands).
+
+> ***google datatype support by type***
+> 
+> <img src={types_of_data} />
+> 
+
+The definitions provided by Google are sound and support our modelling views in all cases bar the ambiguity in handling `command` points. An example is provided below to explore this issue.
+
+---
+
+##### Example
+
+Given a typical valve (or damper) with Position control and feedback points, we would expect to find either:
+
+- OPEN/CLOSED command, status (ENUM) points 
+- **- OR -**
+- % command, status (ANALOG) points
+
+as shown below.
+
+*For the sake of completeness I have also included the **transient** actuator control signals, which are Boolean ON/OFF points that actually energize the actuator to move it. They have been included to show the difference between the higher level control/feedback signals, and the actual control signals to energize the actuators. It is not common to integrate these transient signals as they are generally ‘ON’ for a shorter duration that a typical remote system polling interval.*
+
+<img src={valve_example} />
+
+**ENUM version**
+
+In the case of the ENUM version of the valve, Google implies that the ‘position’ subfield should be dropped from the command point field to force interpretation as a multistate, leaving the point fields as:
+
+- Status or Position Status
+- Command
+
+While this does make sense in the context of a simple valve with a handful of points, it feels like some clarity has been lost. We are instead forced to assume that the command and status points relate to the valve position. This may create ambiguity in the case of more complex objects. Additionally, this creates a separation in naming strategy for related command and status points, causing a difference in structure that may be confusing.
+
+From the docs you could also imply that we should name the points:
+
+- Valve Status
+- Valve Command
+
+However this does not fit in well with our sub-parting strategy and reducing name complexity. The addition of the ‘valve’ subfield is not really required, as the point is on a valve entity, and does not add the same clarity to the point field that ‘position’ did. Further, for the exact same ‘position command’ point on another entity type, e.g. Damper, we would need to be named ‘damper command’. This create unnecessary duplication of point types to mask equipment flavours. 
+
+I believe the best method is to leave the field as ‘Position Command’, and explicitly state the unit type of the point as `enum` . This reduces complexity and any assumptions required on the end user.
+
+**ANALOG version**
+
+No issues, this can be modelled as shown above according to the docs:
+
+- Position Command
+- Position Status
+
+The inclusion of the measurement subfield on the command point indicates it is not, by default, a multi-state.
+
+This however is inconsequential as we will be explicitly stating the unit type on the point record.
+
+#### Haystack 
+Provides a series of key value pairs to include in a point definition to reflect its datatype, and define enumerations if applicable.
+
+
+| Tag | Values |
+| --- | --- |
+| kind | <ul><li>Number</li><li>Boolean (Enum)</li><li>String (Enum)</li></ul> |
+| if kind == Number |  |
+| units | “<unit_string>” |
+| else |  |
+| enum | “<list_of_values>” |
+
+## Issue Summary
+
+Need a clear way of differentiating the same `command` ‘point’ based on expected values. 
+
+Observational points are split along analog (`sensor`) and enumerated values (`status`) by class. `command` points are not.
+
+e.g. given a `position_command` point do we expect an OPEN/CLOSED signal, or a continuous position signal?
+
+## Proposed Strategy
+
+Brick does not provide an explicit definition for delineating this at this time, but both Google Digital buildings ontology and Haystack provide some guidance around how to handle this. We will leverage this guidance to implement an idiomatic Brick way to capture this information.
+
+***Objectives***:
+
+1. Explicitly indicate expected datatype for a point
+2. Keep point class focused on point function; keep point classes concise. 
+
+***Options***:
+
+1. Add explicit datatype declaration as property on a point entity
+2. Add additional tag to command classes indicating command ‘measurable’ value (a la Google DBO). All plain command classes are assumed ENUM.
+    - e.g. percentage; 
+    Position_Percentage_Command.
+3. Add a new point type: `enum command` or similar. All `command` points are analog, `enum commands` are ENUMS. Similar to how `status` and `sensor` work.
+
+---
+
+***Discussion:***
+
+❌ **Option 2** does not conform to objective 2. It will result in additional complexity in class names; and requires assumptions when processing for end uses. A point indicates a particular function, i.e. commanding the position of an valve; It could be a binary or analog signal, but it is still the position signal. We do not want to pollute the waters here with multiple classes for the same thing, unless a new ‘Command’ point type is defined (option 3).
+
+❌ **Option 3** is attractive as it removes the need for additional metadata, but it will expand the number of classes in existence. Unlike option 2 however it is explicit in the expected types, no assumptions based on additional class modifiers are required. Google DBO has many more point types than Brick, and I think an expansion of the Point Types, or a second level of subtypes, would be useful for the ontology.
+
+- Point
+    - Command: analog
+    - Enum Command: ENUM
+    - Sensor: analog
+    - Status: ENUM
+    - Setpoint: analog
+    - Parameter: analog
+
+For the short term however this is too divergent from Brick, and leveraging an existing brick concept is probably more practicable.
+
+---
+
+***Solution:***
+
+Option 1. This fits in with existing Brick structure and does not result in additional classes. It however requires a second level of checking when using points; both class and datatype need to be checked for end use as the class does not contain all info.
+
+Define data types for a sensor:
+
+- **Numeric**: analog sensor readings, counts, setpoints, etc.
+- **String**: text based sensor values (same as enum, but not a known list of expected values)
+- **Enumerated**: int to string, or string to string. Known list of expected values.
+- **Boolean**: subset of enum; may not need this one.
+- **Complex**: Other datatypes or objects.
+
+Every point definition has an associated data type entity property:
+
+```jsx
+:s1 a brick:Position_Command ;
+	brick:hasUnit qudt:Unitless ;
+	brick:datatype [
+		brick:value brick:ENUM ;
+		brick:states {     // this is not valid RDF. Just for example.
+			1: OPEN,
+			0: CLOSED
+		}
+]
+
+:s2 a brick:Position_Command ;
+	brick:hasUnit qudt:percentage;
+	brick:datatype [
+		brick:value brick:Numeric ; // this is redundant, but can be automatically applied on unit assignment
+]
+```
+
+## Conclusion
+
+Use brick entity properties to capture datatype of a point entity.
+
+```jsx
+:s1 a brick:Position_Command ;
+	brick:hasUnit qudt:Unitless ;
+	brick:datatype [
+		brick:value brick:ENUM ;
+		brick:states {
+			STATES
+		}
+	]
+```
