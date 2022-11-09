@@ -11,13 +11,13 @@ Type: Internal Guidance
 
 ---
 
-# Overview
+## Overview
 
 Some confusion exists around the naming of points that deal with setpoint ranges, and with points that deal with aggregation of other points.
 
 It is the aim of this note to set the Switch approach for these two concepts.
 
-# Review of modelling systems
+## Review of modelling systems
 
 The various modelling ontologies and taxonomies add to this confusion as they all take a different approach to this task.
 
@@ -28,7 +28,7 @@ The various modelling ontologies and taxonomies add to this confusion as they al
     > 
 - **Haystack**: Only provides min/max/occ/unocc tags. Does not provide a method for separation of these concepts.
 
-# Issue Summary
+## Issue Summary
 
 There are three categories of point that share overlapping terminology:
 
@@ -44,13 +44,13 @@ The core of the issue is the shared usage of ‘min/max’ to denote aggregation
 
 In the next section we will define the language we are going to use to differentiate these.
 
-# Proposed Strategy
+## Proposed Strategy
 
 We will utilise the Google method of modelling these, modified to fit into the Brick Schema ontology. 
 
 Each of the three point types is detailed below.
 
-## Setpoint Ranges
+### Setpoint Ranges
 
 :::info
 💡 Utilise the `limit` keyword in a **`Setpoint`** class to denote boundaries.
@@ -76,7 +76,7 @@ These terms are equivalent from the perspective of HVAC zone control modelling. 
 
 The exact positioning of the term ‘high limit’ (for example) within the class name is not important. Further discussion to be had on preferred order. The only restriction is that the term comes before the point type designator (’Setpoint’), which in Brick is always at the end of the class name. 
 
-## Setpoint Limits
+### Setpoint Limits
 
 Setpoint limits are internal controller parameters that limit what can be set when configuring controller variables. These points are rarely exposed (in our experience) and currently are ***not*** utilised in our analytics offerings.
 
@@ -105,7 +105,7 @@ A setpoint will generally have a parameter for both a high and low limit.
 | Zone Air Temperature Cooling Setpoint | Zone Air Temperature Cooling Setpoint Low Limit (Parameter) |  |
 | Zone Air Temperature Low Limit Setpoint | Zone Air Temperature Low Limit Setpoint Low Limit (Parameter) | this is ugly; but unlikely. Generally we would have a single pair of high/low limit parameters for all ‘ZAT’ setpoints. |
 
-## Aggregated Points
+### Aggregated Points
 
 Aggregation is represented by the addition of an aggregation operator at the beginning of a point class.
 
@@ -153,7 +153,7 @@ We will utilise an additional Brick concept called ‘entity properties’ to ca
     ] ;
 ```
 
-# Conclusion
+## Conclusion
 
 **Setpoint ranges**
 
