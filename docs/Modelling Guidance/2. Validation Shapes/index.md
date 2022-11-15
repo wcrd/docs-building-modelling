@@ -1,7 +1,7 @@
 ---
-sidebar_label: Validation Shapes
+sidebar_label: Validating a Model (Shapes)
 title: Validation Shapes
-sidebar_position: 1
+sidebar_position: 2
 ---
 import DocCardList from '@theme/DocCardList';
 
