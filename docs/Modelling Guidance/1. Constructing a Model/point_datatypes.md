@@ -6,13 +6,13 @@ title: Point Datatypes
 Brick does not provide explicit separation of the point classes by datatype. This poses a problem for visualisation, analytics, and other downstream uses. It is therefore necessary to explicitly state the datatype expected for a particular point.
 
 :::note
-There is particular ambiguity around the definition of `command` points. See here for more detail: [Command: ENUM vs Analog](<./docs/Modelling Guidance/3. Point Classification Decisions/command_analog_vs_enum.mdx>)
+There is particular ambiguity around the definition of `command` points. See here for more detail: [Command: ENUM vs Analog](#)
 :::
 
 ## Overview
 Summary of datatypes per point class/sub-class.
 
-| Point Type | Datatype | Detail | Other Allowable Datatypes |
+| Point Type | Datatype | Detail | Allowable Datatypes |
 | --- | --- | --- | --- |
 | Status | `Boolean` | *default* | `Boolean`, `Complex` |
 | ↳ *Mode Status* | `EnumeratedValue` | *default* | `EnumeratedValue` |
@@ -71,7 +71,7 @@ We will use the `brick` entity properties concept to capture the datatype and an
 :subject a brick:point_class ;
     brick:datatype [
         brick:value qudt:data_type ;
-        brick:state qudt:Enumeration ; # This is optional; Only valid for Enumerated and Boolean datatypes
+        brick:states :enum_1 ; # This is optional; Only valid for Enumerated and Boolean datatypes; :enum_1 a qudt:Enumeration
     ] .
 ```
 
