@@ -1,5 +1,6 @@
 ---
 sidebar_label: Root Parents
+sidebar_position: 1
 ---
 
 # Root Parents
@@ -8,7 +9,7 @@ sidebar_label: Root Parents
 The ***Root Parent*** is a useful model enhancement to make navigating and searching `brick:Equipment` in the graph model easier.
 
 :::info
-The ***Root Parent*** is top level entity that is found following the `brick:hasPart` relationship from the current entity, filtered to the same core type (Equipment) as the current entity. The ***Root Parent*** is intended only for `brick:Equipment` entities, as these are composed of other entities in a nested format.
+The ***Root Parent*** is top level entity that is found following the `brick:hasPart` relationship from the current entity, filtered to the same core type (`brick:Equipment`) as the current entity. The ***Root Parent*** is intended only for `brick:Equipment` entities, as these are composed of other entities in a nested format.
 :::
 
 The ***Root Parent*** makes it straight-forward to return all components and points of a given entity.
@@ -17,7 +18,7 @@ The ***Root Parent*** makes it straight-forward to return all components and poi
 1. Given a model, how would you display the hierarchical structure of Equipment?
 2. Given an entity, how would you tell it was stand-alone, or part of some larger entity?
 
-Both of these can be answered via standard graph queries, however repeatedly executing these queries is tedious when exploring a model. Better we pre-calculate and store this information in the model on update to improve performance and experience.
+Both of these can be answered via standard graph queries, however repeatedly executing these queries is tedious when exploring a model. Better we pre-calculate and store this information in the model (or a supporting model) on update to improve performance and experience.
 
 The reasoning for this enhancement is better explained via an example.
 
@@ -107,7 +108,7 @@ WHERE {
 # 3 Hot_Water_Coil          AHU_1
 # 4 Chilled_Water_Coil      AHU_1
 ```
-These queries need to be executed and processed every time a user is searching the model. Rather that simply searching for 'AHU_1', the user must wait for a complex query to return. It would be better instead to pre-calculate and store this information in the model on update.
+These queries need to be executed and processed every time a user is searching the model. Rather that simply searching for 'AHU_1', the user must wait for a complex query to return. It would be better instead to pre-calculate and store this information in the model (or a supporting model) on update.
 
 ### Shortcut (Enhancement)
 Now, if we calculate the root_parent on model update, we can query the model much more easily.
