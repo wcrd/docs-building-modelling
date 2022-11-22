@@ -33,3 +33,8 @@ Given the same model from the LINK(***Root Parent***) page the ***Entity Paths**
 | ↳ Damper              | `/AHU/Damper` |
 | ↳ Hot_Water_Coil      | `/AHU/Hot_Water_Coil` |
 | ↳ Chilled_Water_Coil  | `/AHU/Chilled_Water_Coil` |
+
+
+:::note
+For interactively modifying the model using the ***Entity Path***, unique identifiers should be shown as the path variables (or made available in UI), such as the `label` (if uniqueness enforced) or `subject`, otherwise the user does not know explicitly what components are being modified.
+:::
