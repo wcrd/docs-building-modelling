@@ -1,0 +1,91 @@
+---
+sidebar_label: AirThings
+# Display h2 to h4 headings
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AirThings
+
+| | |
+| --- | --- |
+| ***Website*** | https://www.airthings.com/business |
+| ***Category*** | IAQ Monitoring |
+
+
+## About
+
+AirThings provide Indoor Air Quality and Radon measurement IoT devices and business API. There are a variety of models with a mix of different sensors.
+
+## Modelling Guidance
+
+### Relationships
+| *Relationship* | *Required* | *Description* |
+| --- | --- | --- |
+| `brick:hasLocation` | `true` | AirThings IoT devices are installed directly in the zone of interest. Providing a `location` for device is required to integrate it into the building model. | 
+
+### Structure
+
+No `parts` required.
+These are simple devices that contain a set of points.
+
+### Points
+
+#### For Home
+
+| *Source*     | *switch:hasPointName*                | *sh:class*                                           | Home   | Wave Radon | Wave Plus | Wave Mini | View Plus | View Pollution | View Radon |
+|-------------------|------------------------------------|----------------------------------------------------|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+| radonShortTermAvg | Average Zone Air Radon             | switch:Average_Zone_Air_Radon_Concentration_Sensor | ✔ | ✔     | ✔    |           | ✔    |                | ✔     |
+| battery           | Battery Level                      | switch:Battery Level Sensor                        | ✔ | ✔     | ✔    | ✔    | ✔    | ✔         | ✔     |
+| rssi              | Received Signal Strength Indicator | switch:Received Signal Strength Indicator Sensor   |        |            |           |           | ✔    | ✔         | ✔     |
+| co2               | Zone Air CO2                       | switch:Zone_Air_CO2_Sensor                         |        |            | ✔    |           | ✔    |                |            |
+| humidity          | Zone Air Humidity                  | Zone_Air_Humidity_Sensor                           |        | ✔     | ✔    | ✔    | ✔    | ✔         | ✔     |
+| pm1               | Zone Air PM1                       | PM1_Sensor                                         |        |            |           |           | ✔    | ✔         |            |
+| pm25              | Zone Air PM2.5                     | PM2.5_Sensor                                       |        |            |           |           | ✔    | ✔         |            |
+| pressure          | Zone Air Pressure                  | switch:Zone Air Pressure Sensor                    |        |            | ✔    |           | ✔    |                |            |
+| temp              | Zone Air Temperature               | Zone_Air_Temperature_Sensor                        |        | ✔     | ✔    | ✔    | ✔    | ✔         | ✔     |
+| voc               | Zone Air TVOC                      | switch:Zone Air TVOC Level Sensor                  |        |            | ✔    | ✔    | ✔    |                |            |
+| virusRisk         | Zone Air Virus Risk Rating         | switch:Zone Air Virus Risk Rating Sensor           |        |            |           | ✔    |           |                |            |
+
+#### For Business
+| *Source*     | *switch:hasPointName*                | *sh:class*                                | Space Pro | Space CO2 Mini | Space CO2 | Space Radon |
+|-------------------|------------------------|----------------------------------------------------|:-:|:-:|:-:|:-:|
+| radonShortTermAvg | Average Zone Air Radon | switch:Average_Zone_Air_Radon_Concentration_Sensor |           |                |           | ✔      |
+| battery           | Battery Level          | switch:Battery Level Sensor                        | ✔    | ✔         | ✔    | ✔      |
+| lux               | Illuminance            | Illuminance Sensor                                 |           | ✔         |           |             |
+| light             | Light Level            | switch:Light Level Sensor                          | ✔    |                | ✔    | ✔      |
+| pm25              | Zone Air PM2.5         | PM2.5_Sensor                                       | ✔    |                |           |             |
+| pressure          | Zone Air Pressure      | switch:Zone Air Pressure Sensor                    | ✔    | ✔         |           | ✔      |
+| temp              | Zone Air Temperature   | Zone_Air_Temperature_Sensor                        | ✔    | ✔         | ✔    | ✔      |
+| voc               | Zone Air TVOC          | switch:Zone Air TVOC Level Sensor                  | ✔    |                |           | ✔      |
+
+##### Additional Points
+Business devices may have additional points associated with the device through the API. These are generally ambient condition points provided by an external weather station.
+
+| *Source*     | *switch:hasPointName*                | *sh:class*                                  |
+|-----------------|---------------------------------|-----------------------------------------------|
+| outdoorCo       | Outside Ambient Air CO          | switch:Outside Ambient Air CO   Sensor        |
+| outdoorHumidity | Outside Ambient Air Humidity    | switch:Outside Ambient Air Humidity Sensor    |
+| outdoorNo       | Outside Ambient Air NO          | switch:Outside Ambient Air NO Sensor          |
+| outdoorNo2      | Outside Ambient Air NO2         | switch:Outside Ambient Air NO2 Sensor         |
+| outdoorO3       | Outside Ambient Air O3          | switch:Outside Ambient Air Ozone Sensor       |
+| outdoorPm1      | Outside Ambient Air PM1         | switch:Outside Ambient Air PM1 Sensor         |
+| outdoorPm10     | Outside Ambient Air PM10        | switch:Outside Ambient Air PM10 Sensor        |
+| outdoorPm25     | Outside Ambient Air PM2.5       | switch:Outside Ambient Air PM2.5 Sensor       |
+| outdoorPressure | Outside Ambient Air Pressure    | switch:Outside Ambient Air Pressure Sensor    |
+| outdoorSo2      | Outside Ambient Air SO2         | switch:Outside Ambient Air SO2 Sensor         |
+| outdoorTemp     | Outside Ambient Air Temperature | switch:Outside Ambient Air Temperature Sensor |
+
+
+#### For Professionals
+| *Source*     | *switch:hasPointName*                | *sh:class*                                | Corentium Pro | Corentium Plus |
+|-------------------|------------------------|----------------------------------------------------|:-:|:-:|
+| radonShortTermAvg | Average Zone Air Radon | switch:Average_Zone_Air_Radon_Concentration_Sensor | ✔       | ✔         |
+| battery           | Battery Level          | switch:Battery Level Sensor                        | ✔       | ✔         |
+| humidity          | Zone Air Humidity      | Zone_Air_Humidity_Sensor                           | ✔       | ✔         |
+| pressure          | Zone Air Pressure      | switch:Zone Air Pressure Sensor                    | ✔       | ✔         |     
+| temp              | Zone Air Temperature   | Zone_Air_Temperature_Sensor                        | ✔       | ✔         |
+| tilt              |                        |                                                    | ✔       | ✔         | 
