@@ -19,6 +19,6 @@ The table below is a model style agnostic overview of how different point types 
 ||||s||
 |---|---|---|---|---|
 ||   | ***Sensor (Analog)*** | ***Status (Mode\|ENUM)*** | ***Status (Binary)*** |
-|| ***Command (Analog)*** | abs(c - s) > threshold | c < threshold && categoryOf( enum[s] ) == ACTIVE <br/> \|\| <br/> c >0 \|\| threshold && categoryOf( enum[s] ) != ACTIVE | c > threshold && !s |
-|**c**| ***Command (Mode\|ENUM)*** | categoryOf( enum[c] ) == ACTIVE && s < threshold <br/> \|\| <br/> categoryOf( enum[c] ) != ACTIVE && s > 0 \|\| threshold | enum[c] != enum[s] <br/> \|\| <br/> categoryOf( enum[c] ) != categoryOf( enum[s] ) | categoryOf( enum[c] ) == ACTIVE && !s |
-|| ***Command (Binary)*** | c && s < threshold <br/> \|\| <br/> !c && s > 0 \|\| threshold | !c && categoryOf( enum[s] ) == ACTIVE | c != s |
+|| ***Command (Analog)*** | `abs(c - s) > threshold` | `c < threshold && categoryOf( enum[s] ) == ACTIVE` <br/> OR <br/> <code>c >0 &#124;&#124; threshold && categoryOf( enum[s] ) != ACTIVE</code> | `c > threshold && !s` |
+|**c**| ***Command (Mode\|ENUM)*** | `categoryOf( enum[c] ) == ACTIVE && s < threshold` <br/> OR <br/> <code>categoryOf( enum[c] ) != ACTIVE && s > 0 &#124;&#124; threshold</code> | `enum[c] != enum[s]` <br/> OR <br/> `categoryOf( enum[c] ) != categoryOf( enum[s] )` | `categoryOf( enum[c] ) == ACTIVE && !s` |
+|| ***Command (Binary)*** | `c && s < threshold` <br/> OR <br/> <code>!c && s > 0 &#124;&#124; threshold</code> | `!c && categoryOf( enum[s] ) == ACTIVE` | `c != s` |
