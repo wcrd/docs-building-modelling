@@ -205,12 +205,14 @@ Brick does not provide an explicit definition for delineating this at this time,
 ❌ **Option 3** is attractive as it removes the need for additional metadata, but it will expand the number of classes in existence. Unlike option 2 however it is explicit in the expected types, no assumptions based on additional class modifiers are required. Google DBO has many more point types than Brick, and I think an expansion of the Point Types, or a second level of subtypes, would be useful for the ontology.
 
 - Point
-    - Command: analog
-    - Enum Command: ENUM
-    - Sensor: analog
-    - Status: ENUM
-    - Setpoint: analog
-    - Parameter: analog
+	- Command: analog
+	- Bool Command: Binary
+	- Mode Command: ENUM
+	- Sensor: analog
+	- Status: Binary
+	- Mode Status: ENUM
+	- Setpoint: analog
+	- Parameter: analog
 
 For the short term however this is too divergent from Brick, and leveraging an existing brick concept is probably more practicable.
 
