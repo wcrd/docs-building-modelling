@@ -6,7 +6,7 @@ const FeatureList = [
   {
     title: 'Docs',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: "/docs/category/modelling-guidance",
+    link: "/docs/intro",
     description: (
       <>
         Guidance on how to model different Equipment Types & Systems, classify points, and validate models for downstream use!
