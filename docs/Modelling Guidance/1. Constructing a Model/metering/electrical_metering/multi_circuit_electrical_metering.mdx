@@ -1,0 +1,60 @@
+---
+sidebar_label: Multi-circuit
+title: Multi-circuit Electrical Metering
+---
+
+## About
+
+Multi-circuit meters allow the monitoring of a number of circuits through a single configurable controller. Each multi-circuit meter has a number of 'virtual' meters.
+
+## Classes
+
+**_Hierarchy_**
+> - Electrical Meter
+>    - Multi-circuit Electrical Meter
+>        - Branch-circuit Electrical Meter
+
+### Multi-circuit electrical meter
+ Multi-circuit meters allow the monitoring of many metering points from a single controller without having to mount/purchase/wire/commission individual energy meters. Typically allow between 4 - 18 3-phase ‘meters’ to be added per controller.
+
+### Branch-circuit  electrical meter
+A multi-circuit meter designed to monitor a number of circuits in close proximity branching from a single source; i.e. a distribution board, panel, or switchgear installation. Typically more compact design with built in aggregation functions across the branch circuits.
+
+## Modelling
+A multi-circuit meter is made up of a number of parts of type: **_Electrical Meter_**.
+
+The component Electrical Meters should be marked as **Virtual Meters** as they exist inside the multi-circuit controller, not as physical individual meters. This does not affect querying and these ‘meters’ are identical to normal electrical meters. This additional property just helps identify meters that do not have a physical presence within the building.
+
+[https://docs.brickschema.org/modeling/meters.html#virtual-meters](https://docs.brickschema.org/modeling/meters.html#virtual-meters)
+
+#### Example model:
+
+```jsx
+:multi-circuit-meter-1 a switch:Multi_Circuit_Meter ;
+	rdfs:label "MSSB Meter" ;
+	brick:hasPart :em-1, :em-2 .
+
+:em-1 a brick:Electrical_Meter ;
+	rdfs:label "Chiller Plant Meter" ;
+	brick:isPartOf :multi-circuit-meter-1 ;
+	brick:isVirtualMeter [ brick:value true ] .
+
+:em-2 a brick:Electrical_Meter ;
+	rdfs:label "Rooftop Plant Meter" ;
+	brick:isPartOf :multi-circuit-meter-1 ;
+	brick:isVirtualMeter [ brick:value true ] .
+```
+
+:::info
+By default, virtual meters look exactly like physical meters so no queries need to be changed if you don't care about the distinction between them. It is also possible to query *only* virtual meters:
+```sql
+SELECT ?meter WHERE {
+   ?meter rdf:type/rdfs:subClassOf* brick:Meter ;
+          brick:isVirtualMeter/brick:value true .
+}
+```
+:::
+
+## Additional References
+* https://www.packetpower.com/products
+* [Scheider Multi-circuit meters](https://www.productinfo.schneider-electric.com/nadigest/5c51d645347bdf0001f1f280/Master/17704_MAIN%20(bookmap)_0000041932.xml/$/PowerLogicEM4900SeriesMulti-Circuit-638238BB)
